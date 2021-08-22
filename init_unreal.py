@@ -6,8 +6,15 @@ from os.path import isfile, join
 def onEditorStart():
     unreal.log_warning("hello world")
     # import_assets()
+    newLevelName = "{new_level_name}"
+    newLevelName = newLevelName.replace(" ", "_")
+    if newLevelName == "NO_NAME":
+        return
+    print("new Level name is {}".format(newLevelName))
+    # loadNewLevel(newLevelName)
+    
     staticMeshOptions = buildStaticMeshImportOptions()
-    fileName = "D:/vr project/New folder/textured.fbx"
+    fileName = "{fbx_file_name}"
     if fileName == "{fbx_file_name}":
         return
     assetPath = "/Game/ImportedAssets/Main Stage"
@@ -27,9 +34,12 @@ def onEditorStart():
 
     task = buildImportTask(fileName, assetPath, staticMeshOptions)
     outputPath = executeImportTasks([task])[0]
-    #unreal.log(outputPath)
     executeImportTasks(all_tasks)
-    spawnBlueprintActor(path=outputPath, actor_location=[0, 0, 215], world_scale=unreal.Vector(4, 4, 4))
+    # spawnBlueprintActor(path=outputPath, actor_location=[0, 0, 215], world_scale=unreal.Vector(4, 4, 4))
+
+    success = loadNewLevel(newLevelName)
+    if success:
+        spawnBlueprintActor(path=outputPath, actor_location=[0, 0, 215], world_scale=unreal.Vector(4, 4, 4))
 
     return
 
@@ -40,7 +50,7 @@ def executeImportTasks(tasks=[]):
     imported_asset_paths = []
     results = []
     for task in tasks:
-        #for result in task.result:
+        # for result in task.result:
         results.append(task.result)
         for path in task.get_editor_property('imported_object_paths'):
             imported_asset_paths.append(path)
@@ -111,8 +121,7 @@ def buildImportTask(filename='', destination_path='', options=None):
     return task
 
 
-def spawnBlueprintActor(path='', actor_location=[0, 0, 0], world_scale=unreal.Vector(1, 1, 1), object = None):
-
+def spawnBlueprintActor(path='', actor_location=[0, 0, 0], world_scale=unreal.Vector(1, 1, 1), object=None):
     actor_object = unreal.EditorAssetLibrary.load_asset(path) if object is None else object
     actor = unreal.EditorLevelLibrary.spawn_actor_from_object(actor_object, actor_location)
     # Edit Properties
@@ -123,7 +132,16 @@ def spawnBlueprintActor(path='', actor_location=[0, 0, 0], world_scale=unreal.Ve
     actor.set_actor_scale3d(world_scale)
     unreal.log_warning(actor)
     actor.set_mobility(unreal.ComponentMobility.STATIONARY)
+    unreal.log_warning("SADASDASDASDASD")
     return actor
 
+
+def loadNewLevel(levelName="New LEVEL"):
+    level_to_save = join('/Game/VirtualRealityBP/Maps/', levelName)
+    success = unreal.EditorLevelLibrary.new_level_from_template(level_to_save,
+                                                                '/Game/VirtualRealityBP/Maps/TrainingArea1')
+    if success:
+        unreal.EditorLevelLibrary.load_level(level_to_save)
+    return success
 
 onEditorStart()
