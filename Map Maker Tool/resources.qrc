@@ -1,0 +1,5 @@
+<RCC>
+    <qresource lang="python" prefix="/python">
+        <file>init_unreal.py</file>
+    </qresource>
+</RCC>
