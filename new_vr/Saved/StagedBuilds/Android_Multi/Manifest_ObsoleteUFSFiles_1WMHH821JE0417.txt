@@ -1,8 +1,0 @@
-Engine/Content/EditorSounds/Notifications/CompileSuccess_Cue.uasset
-Engine/Content/EditorSounds/Notifications/CompileSuccess_Cue.uexp
-new_vr/Content/VirtualRealityBP/Maps/eeeeeeeeeeee.uexp
-new_vr/Content/VirtualRealityBP/Maps/eeeeeeeeeeee.umap
-new_vr/Content/VirtualRealityBP/Maps/eeeeeeeeeeee_BuiltData.uasset
-new_vr/Content/VirtualRealityBP/Maps/eeeeeeeeeeee_BuiltData.ubulk
-new_vr/Content/VirtualRealityBP/Maps/eeeeeeeeeeee_BuiltData.uexp
-new_vr/Saved/Logs/new_vr-backup-0001.01.01-00.00.00.log

@@ -1,1 +1,0 @@
-../../../new_vr/new_vr.uproject  /Game/VirtualRealityBP/Maps/Demo_Hadassah -Messaging -SessionId=E59915274C4AD23B746B40B8C8E3A99E -SessionOwner="Yona Harel" -SessionName="Launch On Device" -iterative

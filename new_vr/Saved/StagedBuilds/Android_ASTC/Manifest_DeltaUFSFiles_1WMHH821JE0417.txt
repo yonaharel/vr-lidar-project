@@ -1,8 +1,0 @@
-Engine/GlobalShaderCache-GLSL_ES3_1_ANDROID.bin
-Engine/Content/EditorSounds/Notifications/CompileSuccess_Cue.uasset
-Engine/Content/EditorSounds/Notifications/CompileSuccess_Cue.uexp
-new_vr/AssetRegistry.bin
-new_vr/Content/ShaderArchive-Global-GLSL_ES3_1_ANDROID.ushaderbytecode
-new_vr/Content/ShaderArchive-new_vr-GLSL_ES3_1_ANDROID.ushaderbytecode
-Manifest_NonUFSFiles_Android.txt
-Manifest_UFSFiles_Android.txt
