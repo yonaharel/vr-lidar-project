@@ -1,6 +1,9 @@
 import unreal
+import os
 from os import listdir
-from os.path import isfile, join
+from os.path import  isfile, join
+import glob
+
 
 """
 THIS FILE IS FROM QT.
@@ -23,20 +26,22 @@ def onEditorStart():
 
     dirPath = "{directory_path}"
 
-    fileNames = []
+    files = []
     if dirPath != "NOT_SELECTED":
-        fileNames = [f for f in listdir(dirPath) if (isfile(join(dirPath, f)) and f.endswith('.fbx'))]
+        # getting all the fbx files from the sub directories
+        files = glob.glob(dirPath + '/**/*.fbx', recursive=True)
 
     all_tasks = []
-    # unreal.log_warning(onlyFiles)
-    for file in fileNames:
-        file_name = join(dirPath, file)
-        all_tasks.append(buildImportTask(file_name, "/Game/VRItems", staticMeshOptions))
+
+    for file in files:
+        # getting the actual name of the fbx
+        objectName = os.path.basename(file)
+        import_task = buildImportTask(file, "/Game/VRItems/" + objectName, staticMeshOptions)
+        all_tasks.append(import_task)
 
     task = buildImportTask(fileName, assetPath, staticMeshOptions)
     outputPath = executeImportTasks([task])[0]
     executeImportTasks(all_tasks)
-    # spawnBlueprintActor(path=outputPath, actor_location=[0, 0, 215], world_scale=unreal.Vector(4, 4, 4))
 
     success = loadNewLevel(newLevelName)
     if success:
